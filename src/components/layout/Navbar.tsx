@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ShoppingBag, User, Menu, X, Tag } from 'lucide-react'
+import { ShoppingBag, LayoutDashboard, Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { User as SupabaseUser } from '@supabase/supabase-js'
@@ -22,7 +22,7 @@ export function Navbar() {
         return () => subscription.unsubscribe()
     }, [])
 
-    const isActive = (href: string) => pathname === href
+    const isActive = (href: string) => pathname.startsWith(href)
 
     return (
         <nav className={styles.nav}>
@@ -40,18 +40,17 @@ export function Navbar() {
 
                     {user ? (
                         <>
-                            {/* Any signed-in user can sell */}
-                            <Link href="/dashboard/seller" className={`${styles.link} ${isActive('/dashboard/seller') ? styles.activeLink : ''}`}>
-                                <Tag size={15} style={{ display: 'inline', marginRight: 4 }} />
-                                Sell
-                            </Link>
                             {/* Cart */}
                             <Link href="/cart" className={styles.iconLink} aria-label="Cart">
                                 <ShoppingBag size={20} />
                             </Link>
-                            {/* Account / orders */}
-                            <Link href="/dashboard/buyer" className={styles.iconLink} aria-label="My Orders">
-                                <User size={20} />
+                            {/* Unified dashboard — buy, sell, orders, listings */}
+                            <Link
+                                href="/dashboard"
+                                className={`${styles.iconLink} ${isActive('/dashboard') ? styles.activeLink : ''}`}
+                                aria-label="Dashboard"
+                            >
+                                <LayoutDashboard size={20} />
                             </Link>
                         </>
                     ) : (

@@ -18,7 +18,7 @@ export async function placeOrder(formData: {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { data, error } = await (supabase as any).rpc('place_order', {
-        p_buyer_id: user.id,
+        p_user_id: user.id,           // unified: user_id for both buyer and any context
         p_product_ids: formData.productIds,
         p_shipping_name: formData.shipping.name,
         p_shipping_address: formData.shipping.address,
@@ -44,7 +44,7 @@ export async function getMyOrders() {
         products (id, title, image_urls, price, status)
       )
     `)
-        .eq('buyer_id', user.id)
+        .eq('user_id', user.id)   // unified: buyer is identified by user_id
         .order('created_at', { ascending: false })
 
     return data ?? []
@@ -65,7 +65,7 @@ export async function getOrderById(orderId: string) {
       )
     `)
         .eq('id', orderId)
-        .eq('buyer_id', user.id)
+        .eq('user_id', user.id)   // unified: user_id identifies the order owner
         .single()
 
     return data

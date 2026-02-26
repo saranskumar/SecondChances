@@ -12,7 +12,6 @@ export interface Database {
             profiles: {
                 Row: {
                     id: string
-                    role: 'buyer' | 'seller' | 'admin'
                     display_name: string | null
                     avatar_url: string | null
                     created_at: string
@@ -28,7 +27,7 @@ export interface Database {
             products: {
                 Row: {
                     id: string
-                    seller_id: string
+                    user_id: string        // the user who listed this product
                     category_id: number
                     title: string
                     description: string | null
@@ -44,7 +43,7 @@ export interface Database {
             orders: {
                 Row: {
                     id: string
-                    buyer_id: string
+                    user_id: string        // the user who placed the order (buyer)
                     total_amount: number
                     status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled'
                     shipping_name: string | null
@@ -83,7 +82,7 @@ export interface Database {
         Functions: {
             place_order: {
                 Args: {
-                    p_buyer_id: string
+                    p_user_id: string           // buyer's user id
                     p_product_ids: string[]
                     p_shipping_name?: string
                     p_shipping_address?: string

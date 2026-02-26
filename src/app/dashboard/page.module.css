@@ -1,0 +1,296 @@
+.header {
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    font-family: var(--ff-heading);
+    font-size: 2rem;
+}
+
+.header p {
+    color: var(--ink-60);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.successBanner {
+    background: #e6f4e6;
+    color: #2d6a2d;
+    padding: 0.875rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* ─── Tabs ─────────────────────────────────────────────── */
+.tabs {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1.5px solid var(--mist);
+    margin-bottom: 2rem;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.7rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-60);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1.5px;
+    transition: color var(--transition);
+    text-decoration: none;
+}
+
+.tab:hover {
+    color: var(--ink);
+}
+
+.activeTab {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+}
+
+.count {
+    background: var(--mist);
+    color: var(--ink-60);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+}
+
+/* ─── Panel ─────────────────────────────────────────────── */
+.panel {
+    min-height: 300px;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.empty p {
+    color: var(--ink-60);
+    font-style: italic;
+}
+
+/* ─── Orders ────────────────────────────────────────────── */
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.orderCard {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow var(--transition);
+}
+
+.orderCard:hover {
+    box-shadow: var(--shadow-lift);
+}
+
+.orderHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.orderId {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: monospace;
+    color: var(--ink);
+}
+
+.orderDate {
+    font-size: 0.75rem;
+    color: var(--ink-60);
+    margin-top: 0.2rem;
+}
+
+.orderRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+}
+
+.orderTotal {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.thumbRow {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.itemThumb {
+    position: relative;
+    width: 72px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--mist);
+    flex-shrink: 0;
+}
+
+.orderFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--mist);
+    padding-top: 1rem;
+}
+
+.itemCount {
+    font-size: 0.8125rem;
+    color: var(--ink-60);
+}
+
+/* ─── Listings ──────────────────────────────────────────── */
+.listingsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.listingRow {
+    display: grid;
+    grid-template-columns: 64px 1fr auto auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.875rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--mist);
+    background: var(--white);
+    transition: border-color var(--transition);
+}
+
+.listingRow:hover {
+    border-color: var(--warm);
+}
+
+.listingImg {
+    position: relative;
+    width: 64px;
+    height: 80px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--mist);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-30);
+    font-size: 0.75rem;
+}
+
+.listingTitle {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.listingMeta {
+    font-size: 0.775rem;
+    color: var(--ink-60);
+    margin-top: 0.2rem;
+}
+
+.listingBadges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-end;
+}
+
+.viewLink {
+    font-size: 0.8125rem;
+    color: var(--warm);
+    transition: color var(--transition);
+}
+
+.viewLink:hover {
+    color: var(--ink);
+}
+
+/* ─── Sell form ─────────────────────────────────────────── */
+.formWrap {
+    max-width: 560px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+}
+
+.formTitle {
+    font-family: var(--ff-heading);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.uploadField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.uploadLabel {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink-60);
+}
+
+.fileInput {
+    font-family: var(--ff-body);
+    font-size: 0.875rem;
+    color: var(--ink);
+}
+
+.uploadHint {
+    font-size: 0.75rem;
+    color: var(--ink-30);
+}
+
+@media (max-width: 640px) {
+    .listingRow {
+        grid-template-columns: 64px 1fr auto;
+    }
+
+    .listingBadges {
+        display: none;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+    }
+}

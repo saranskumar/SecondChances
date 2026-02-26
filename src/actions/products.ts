@@ -16,7 +16,7 @@ export async function createProduct(formData: FormData) {
     const category_id = parseInt(formData.get('category_id') as string)
     const files = formData.getAll('images') as File[]
 
-    // Upload images
+    // Upload images to Supabase Storage
     const image_urls: string[] = []
     for (const file of files) {
         if (!file.size) continue
@@ -31,7 +31,7 @@ export async function createProduct(formData: FormData) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { error } = await (supabase as any).from('products').insert({
-        seller_id: user.id,
+        user_id: user.id,   // unified: user is the lister
         title,
         description,
         price,
@@ -43,8 +43,8 @@ export async function createProduct(formData: FormData) {
 
     if (error) throw new Error(error.message)
     revalidatePath('/browse')
-    revalidatePath('/dashboard/seller')
-    redirect('/dashboard/seller?success=1')
+    revalidatePath('/dashboard')
+    redirect('/dashboard?success=1')
 }
 
 export async function getMyListings() {
@@ -55,7 +55,7 @@ export async function getMyListings() {
     const { data } = await supabase
         .from('products')
         .select('*, categories(name, slug)')
-        .eq('seller_id', user.id)
+        .eq('user_id', user.id)   // unified: same field for lister
         .order('created_at', { ascending: false })
 
     return data ?? []
@@ -70,8 +70,8 @@ export async function deleteProduct(productId: string) {
         .from('products')
         .delete()
         .eq('id', productId)
-        .eq('seller_id', user.id)
-        .eq('status', 'available') // Can't delete sold items
+        .eq('user_id', user.id)
+        .eq('status', 'available')
 
-    revalidatePath('/dashboard/seller')
+    revalidatePath('/dashboard')
 }

@@ -47,7 +47,7 @@ export default async function HomePage() {
             <Link href="/browse">
               <Button size="lg">Browse the Collection</Button>
             </Link>
-            <Link href="/dashboard/seller">
+            <Link href="/dashboard?tab=sell">
               <Button size="lg" variant="outline">Start Selling</Button>
             </Link>
           </div>
@@ -112,7 +112,7 @@ export default async function HomePage() {
         <div className={`container ${styles.ctaInner}`}>
           <h2 className={styles.ctaTitle}>Have something worth passing on?</h2>
           <p>List in minutes. Reach buyers who appreciate the beauty of pre-loved fashion.</p>
-          <Link href="/dashboard/seller">
+          <Link href="/dashboard?tab=sell">
             <Button size="lg">Create a Listing</Button>
           </Link>
         </div>
