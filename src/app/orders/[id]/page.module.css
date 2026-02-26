@@ -1,0 +1,212 @@
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.eyebrow {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warm);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.title {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.date {
+    color: var(--ink-60);
+    font-size: 0.875rem;
+    margin-top: 0.3rem;
+}
+
+/* Progress tracker */
+.tracker {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.tracker::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background: var(--mist);
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.stepIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--mist);
+    color: var(--ink-30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--mist);
+    transition: all 0.3s ease;
+}
+
+.done .stepIcon {
+    background: var(--sage);
+    color: var(--ink);
+    border-color: var(--sage);
+}
+
+.active .stepIcon {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+}
+
+.stepLabel {
+    font-size: 0.75rem;
+    color: var(--ink-60);
+    text-align: center;
+    font-weight: 500;
+}
+
+.done .stepLabel {
+    color: var(--ink);
+}
+
+.active .stepLabel {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+/* Layout */
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+    align-items: start;
+}
+
+.sectionTitle {
+    font-family: var(--ff-heading);
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1rem;
+    align-items: center;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.itemImg {
+    position: relative;
+    width: 80px;
+    height: 100px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--mist);
+}
+
+.itemName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.itemName:hover {
+    color: var(--warm);
+}
+
+.itemPrice {
+    font-size: 0.8125rem;
+    color: var(--ink-60);
+    margin-top: 0.25rem;
+}
+
+.sidePanel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 90px;
+}
+
+.panel {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.panel h3 {
+    font-family: var(--ff-heading);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.panel p {
+    font-size: 0.875rem;
+    color: var(--ink-60);
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.totalAmount {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidePanel {
+        position: static;
+    }
+
+    .tracker::before {
+        left: 10%;
+        right: 10%;
+    }
+}

@@ -1,0 +1,65 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.default {
+    background: var(--mist);
+    color: var(--ink-60);
+}
+
+.available {
+    background: #e6f4e6;
+    color: #2d6a2d;
+}
+
+.sold {
+    background: #f4e6e6;
+    color: #6a2d2d;
+}
+
+.pending {
+    background: #f4f0e6;
+    color: #6a5a2d;
+}
+
+.paid {
+    background: #e6f0f4;
+    color: #2d4f6a;
+}
+
+.shipped {
+    background: #e6e6f4;
+    color: #2d2d6a;
+}
+
+.delivered {
+    background: #e6f4ef;
+    color: #2d6a52;
+}
+
+.cancelled {
+    background: #f0f0f0;
+    color: #666;
+}
+
+.like_new {
+    background: #d8f0e8;
+    color: #1a5c3a;
+}
+
+.good {
+    background: #e6f4f1;
+    color: #2d6a5a;
+}
+
+.fair {
+    background: #f4ede6;
+    color: #6a4a2d;
+}

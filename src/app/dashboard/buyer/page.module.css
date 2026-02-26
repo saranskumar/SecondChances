@@ -1,0 +1,114 @@
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    gap: 1rem;
+}
+
+.header h1 {
+    font-family: var(--ff-heading);
+    font-size: 2rem;
+}
+
+.header p {
+    color: var(--ink-60);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.empty p {
+    color: var(--ink-60);
+    font-style: italic;
+}
+
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.orderCard {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow var(--transition);
+}
+
+.orderCard:hover {
+    box-shadow: var(--shadow-lift);
+}
+
+.orderHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.orderId {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-family: monospace;
+    color: var(--ink);
+}
+
+.orderDate {
+    font-size: 0.775rem;
+    color: var(--ink-60);
+    margin-top: 0.25rem;
+}
+
+.orderRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+}
+
+.orderTotal {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.itemsRow {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.itemThumb {
+    position: relative;
+    width: 72px;
+    height: 90px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--mist);
+    flex-shrink: 0;
+}
+
+.orderFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--mist);
+    padding-top: 1rem;
+}
+
+.itemCount {
+    font-size: 0.8125rem;
+    color: var(--ink-60);
+}

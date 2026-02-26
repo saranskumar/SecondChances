@@ -1,0 +1,186 @@
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--ink-60);
+    margin-bottom: 2.5rem;
+}
+
+.breadcrumb a {
+    color: var(--warm);
+    transition: color var(--transition);
+}
+
+.breadcrumb a:hover {
+    color: var(--ink);
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Gallery */
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.primaryImage {
+    position: relative;
+    aspect-ratio: 3/4;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--mist);
+}
+
+.img {
+    object-fit: cover;
+}
+
+.noImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--ink-30);
+    font-style: italic;
+}
+
+.thumbRow {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.thumb {
+    position: relative;
+    width: 80px;
+    height: 100px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.thumb:hover {
+    border-color: var(--warm);
+}
+
+/* Info */
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: sticky;
+    top: 90px;
+}
+
+.badges {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-60);
+}
+
+.title {
+    font-family: var(--ff-heading);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+.price {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.description h3 {
+    font-family: var(--ff-heading);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+}
+
+.description p {
+    font-size: 0.9375rem;
+    color: var(--ink-60);
+    line-height: 1.7;
+}
+
+.seller {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--mist);
+    border-radius: var(--radius-md);
+}
+
+.sellerAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--warm);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.sellerLabel {
+    font-size: 0.75rem;
+    color: var(--ink-60);
+}
+
+.sellerName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.soldBanner {
+    padding: 1.5rem;
+    background: var(--mist);
+    border-radius: var(--radius-md);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.soldBanner p {
+    color: var(--ink-60);
+    font-style: italic;
+}
+
+.soldBanner a {
+    color: var(--warm);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .info {
+        position: static;
+    }
+}

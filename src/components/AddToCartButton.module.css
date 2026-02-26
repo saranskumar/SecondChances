@@ -1,0 +1,17 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.viewCart {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--warm);
+    font-weight: 500;
+    transition: color var(--transition);
+}
+
+.viewCart:hover {
+    color: var(--ink);
+}

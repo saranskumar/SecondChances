@@ -1,0 +1,139 @@
+.header {
+    margin-bottom: 2.5rem;
+}
+
+.header h1 {
+    font-family: var(--ff-heading);
+    font-size: 2rem;
+}
+
+.header p {
+    color: var(--ink-60);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.sidebar {
+    position: sticky;
+    top: 80px;
+}
+
+.filterTitle {
+    font-family: var(--ff-heading);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+}
+
+.catList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.filterLink,
+.activeFilter {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    transition: all var(--transition);
+    color: var(--ink-60);
+}
+
+.filterLink:hover {
+    background: var(--mist);
+    color: var(--ink);
+}
+
+.activeFilter {
+    background: var(--ink);
+    color: var(--cream);
+    font-weight: 500;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.searchBar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.searchInput {
+    flex: 1;
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+    border: 1.5px solid var(--mist);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    outline: none;
+    color: var(--ink);
+}
+
+.searchInput:focus {
+    border-color: var(--warm);
+}
+
+.searchBtn {
+    padding: 0.6rem 1.25rem;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.searchBtn:hover {
+    background: #1a1a16;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.empty {
+    padding: 4rem;
+    text-align: center;
+    color: var(--ink-60);
+}
+
+.clearLink {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--warm);
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .catList {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}

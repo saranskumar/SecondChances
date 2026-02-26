@@ -1,141 +1,233 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
   display: flex;
-  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* ─── Hero ─────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  overflow: hidden;
 }
 
-.main {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 70% 50%, #C5C7BC 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 10% 80%, #B6AE9F44 0%, transparent 60%);
+  z-index: 0;
 }
 
-.intro {
+.heroInner {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+  gap: 1.5rem;
+  max-width: 640px;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  animation: fadeUp 0.7s ease both;
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
+.eyebrow {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--warm);
   font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
 }
 
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+.heroTitle {
+  font-family: var(--ff-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  color: var(--ink);
 }
 
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+.heroTitle em {
+  font-style: italic;
+  color: var(--warm);
 }
 
-.ctas {
+.heroPara {
+  font-size: 1.0625rem;
+  color: var(--ink-60);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.heroCtas {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.ctas a {
+/* ─── Categories ─────────────────────────────────────────── */
+.catSection {
+  background: var(--mist);
+}
+
+.sectionTitle {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  margin-bottom: 2rem;
+  color: var(--ink);
+}
+
+.catGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.catCard {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition);
+  text-decoration: none;
+}
+
+.catCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.catEmoji {
+  font-size: 1.75rem;
+}
+
+.catName {
+  font-size: 0.875rem;
   font-weight: 500;
+  color: var(--ink);
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+/* ─── Featured ─────────────────────────────────────────── */
+.featuredSection {
+  background: var(--cream);
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+.seeAll {
+  font-size: 0.875rem;
+  color: var(--warm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+}
+
+.seeAll:hover {
+  color: var(--ink);
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 4rem;
+  text-align: center;
+}
+
+/* ─── Values ─────────────────────────────────────────────── */
+.valuesStrip {
+  background: var(--sage);
+  padding: 4rem 0;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.valueCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.valueCard h3 {
+  font-family: var(--ff-heading);
+  font-size: 1.125rem;
+  color: var(--ink);
+}
+
+.valueCard p {
+  font-size: 0.9rem;
+  color: var(--ink-60);
+  line-height: 1.6;
+}
+
+/* ─── CTA ──────────────────────────────────────────────── */
+.ctaSection {
+  background: var(--ink);
+}
+
+.ctaInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  padding: 6rem 0;
+}
+
+.ctaTitle {
+  font-family: var(--ff-heading);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  color: var(--cream);
+}
+
+.ctaSection p {
+  color: rgba(251, 243, 209, 0.7);
+  font-size: 1.0625rem;
+}
+
+.ctaSection .btn {
+  border: 1px solid rgba(251, 243, 209, 0.3);
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .catGrid {
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+@media (max-width: 640px) {
+  .catGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 }
