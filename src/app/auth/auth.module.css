@@ -1,0 +1,196 @@
+/* ── Shared auth page styles ────────────────────────────── */
+.page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: radial-gradient(ellipse 80% 60% at 50% 30%, var(--cream), var(--white));
+}
+
+.card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 2.75rem 2.5rem;
+    box-shadow: var(--shadow-lift);
+    animation: fadeUp 0.45s ease both;
+}
+
+.eyebrow {
+    font-family: var(--ff-heading);
+    font-size: 0.875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-family: var(--ff-heading);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.15;
+}
+
+.subtitle {
+    font-size: 0.875rem;
+    color: var(--ink-60);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.passwordRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.forgotLink {
+    font-size: 0.8rem;
+    color: var(--ink-60);
+    text-align: right;
+    transition: color var(--transition);
+}
+
+.forgotLink:hover {
+    color: var(--warm);
+}
+
+/* ── OTP boxes ──────────────────────────────────────────── */
+.otpRow {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.otpBox {
+    width: 52px;
+    height: 60px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: var(--ff-heading);
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--cream);
+    border: 1.5px solid var(--mist);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: all var(--transition);
+    caret-color: var(--warm);
+}
+
+.otpBox:focus {
+    border-color: var(--ink);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(42, 42, 37, 0.06);
+}
+
+.otpFilled {
+    border-color: var(--warm);
+    background: var(--white);
+}
+
+.resendRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+}
+
+.resendBtn {
+    background: none;
+    border: none;
+    font-family: var(--ff-body);
+    font-size: 0.8125rem;
+    color: var(--ink-60);
+    transition: color var(--transition);
+}
+
+.resendBtn:hover:not(:disabled) {
+    color: var(--warm);
+}
+
+.resendBtn:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+/* ── Footer links ───────────────────────────────────────── */
+.switchText {
+    text-align: center;
+    font-size: 0.8375rem;
+    color: var(--ink-60);
+    margin-top: 1.5rem;
+}
+
+.switchLink {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition);
+}
+
+.switchLink:hover {
+    color: var(--warm);
+}
+
+/* ── OAuth divider ──────────────────────────────────────── */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--ink-30);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--mist);
+}
+
+/* ── Google sign-in button ──────────────────────────────── */
+.googleBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.7rem 1rem;
+    background: var(--white);
+    border: 1.5px solid var(--mist);
+    border-radius: var(--radius-md);
+    font-family: var(--ff-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.googleBtn:hover {
+    background: var(--cream);
+    border-color: var(--sage-dark);
+    box-shadow: var(--shadow-soft);
+}
+
+.googleBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

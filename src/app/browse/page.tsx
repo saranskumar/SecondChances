@@ -3,7 +3,18 @@ import { ProductCard } from '@/components/ProductCard'
 import type { ProductWithDetails } from '@/types/database'
 import styles from './page.module.css'
 
-interface SearchParams { category?: string; q?: string }
+interface SearchParams { category?: string; q?: string; minPrice?: string; maxPrice?: string }
+
+async function getCategoryId(slug: string): Promise<number | null> {
+    const supabase = await createClient()
+    const { data } = await supabase
+        .from('categories')
+        .select('id')
+        .eq('slug', slug)
+        .single()
+    const row = data as { id: number } | null
+    return row?.id ?? null
+}
 
 async function getProducts(filters: SearchParams): Promise<ProductWithDetails[]> {
     const supabase = await createClient()
@@ -15,10 +26,22 @@ async function getProducts(filters: SearchParams): Promise<ProductWithDetails[]>
         .order('created_at', { ascending: false })
 
     if (filters.category) {
-        query = query.eq('categories.slug', filters.category)
+        const catId = await getCategoryId(filters.category)
+        if (catId !== null) {
+            query = query.eq('category_id', catId)
+        } else {
+            // Unknown slug → return nothing
+            return []
+        }
     }
     if (filters.q) {
         query = query.ilike('title', `%${filters.q}%`)
+    }
+    if (filters.minPrice) {
+        query = query.gte('price', parseFloat(filters.minPrice))
+    }
+    if (filters.maxPrice) {
+        query = query.lte('price', parseFloat(filters.maxPrice))
     }
 
     const { data } = await query

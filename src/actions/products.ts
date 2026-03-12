@@ -43,8 +43,8 @@ export async function createProduct(formData: FormData) {
 
     if (error) throw new Error(error.message)
     revalidatePath('/browse')
-    revalidatePath('/dashboard')
-    redirect('/dashboard?success=1')
+    revalidatePath('/dashboard/seller')
+    redirect('/dashboard/seller?success=1')
 }
 
 export async function getMyListings() {
