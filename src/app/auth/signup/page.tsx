@@ -64,7 +64,7 @@ export default function SignupPage() {
             <div className={styles.card}>
                 <p className={styles.eyebrow}>Second · Chances</p>
                 <h1 className={styles.title}>Create account</h1>
-                <p className={styles.subtitle}>Buy and sell from a single account — no roles needed</p>
+                <p className={styles.subtitle}>Buy and sell from a single account - no roles needed</p>
 
                 {/* Google */}
                 <button

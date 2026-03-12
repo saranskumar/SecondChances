@@ -16,15 +16,21 @@ async function getFeaturedProducts(): Promise<ProductWithDetails[]> {
   return (data as unknown as ProductWithDetails[]) ?? []
 }
 
+import { Shirt, Accessibility, Scissors, Sparkles, Footprints, Briefcase, Camera, Option } from 'lucide-react'
+
+// Note: Accessibility acts as Dresses, Scissors as Outerwear, Sparkles as Accessories,
+// Footprints as Shoes, Briefcase as Bags, Camera as Vintage, Option as Bottoms.
+// Choosing visually close icons from Lucide since it doesn't have exact clothing items for all.
+
 const CATEGORIES = [
-  { name: 'Tops', slug: 'tops', emoji: '👕' },
-  { name: 'Dresses', slug: 'dresses', emoji: '👗' },
-  { name: 'Outerwear', slug: 'outerwear', emoji: '🧥' },
-  { name: 'Accessories', slug: 'accessories', emoji: '💍' },
-  { name: 'Shoes', slug: 'shoes', emoji: '👠' },
-  { name: 'Bags', slug: 'bags', emoji: '👜' },
-  { name: 'Vintage', slug: 'vintage', emoji: '🎞' },
-  { name: 'Bottoms', slug: 'bottoms', emoji: '👖' },
+  { name: 'Tops', slug: 'tops', icon: Shirt },
+  { name: 'Dresses', slug: 'dresses', icon: Accessibility },
+  { name: 'Outerwear', slug: 'outerwear', icon: Scissors },
+  { name: 'Accessories', slug: 'accessories', icon: Sparkles },
+  { name: 'Shoes', slug: 'shoes', icon: Footprints },
+  { name: 'Bags', slug: 'bags', icon: Briefcase },
+  { name: 'Vintage', slug: 'vintage', icon: Camera },
+  { name: 'Bottoms', slug: 'bottoms', icon: Option },
 ]
 
 export default async function HomePage() {
@@ -41,7 +47,7 @@ export default async function HomePage() {
             <em>a second chance</em>
           </h1>
           <p className={styles.heroPara}>
-            Shop unique, handpicked vintage and pre-loved fashion. Every item sold just once — because great things deserve a good home.
+            Shop unique, handpicked vintage and pre-loved fashion. Every item sold just once - because great things deserve a good home.
           </p>
           <div className={styles.heroCtas}>
             <Link href="/browse">
@@ -62,7 +68,7 @@ export default async function HomePage() {
           <div className={styles.catGrid}>
             {CATEGORIES.map(cat => (
               <Link key={cat.slug} href={`/browse?category=${cat.slug}`} className={styles.catCard}>
-                <span className={styles.catEmoji}>{cat.emoji}</span>
+                <span className={styles.catEmoji}><cat.icon size={24} strokeWidth={1.5} /></span>
                 <span className={styles.catName}>{cat.name}</span>
               </Link>
             ))}
@@ -96,7 +102,7 @@ export default async function HomePage() {
         <div className={`container ${styles.valuesGrid}`}>
           {[
             { title: 'Every Piece Unique', body: 'No duplicates. Each item is one-of-a-kind and sells only once.' },
-            { title: 'Curated Quality', body: 'Sellers describe condition honestly — like new, good, or fair.' },
+            { title: 'Curated Quality', body: 'Sellers describe condition honestly - like new, good, or fair.' },
             { title: 'Sustainable Fashion', body: 'Give pre-loved clothing a second life and reduce waste.' },
           ].map(v => (
             <div key={v.title} className={styles.valueCard}>

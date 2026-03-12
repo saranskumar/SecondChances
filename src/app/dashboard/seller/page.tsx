@@ -7,6 +7,7 @@ import { getIncomingOrders } from '@/actions/orders'
 import { Button } from '@/components/ui/Button'
 import { Input, Textarea, Select } from '@/components/ui/Input'
 import { StatusBadge, ConditionBadge } from '@/components/ui/Badge'
+import { Phone, CheckCircle2 } from 'lucide-react'
 import styles from './page.module.css'
 
 async function getCategories() {
@@ -34,7 +35,7 @@ export default async function SellerDashboardPage({
             <div className={styles.header}>
                 <div>
                     <h1>Sell an Item</h1>
-                    <p>List something you want to pass on — it sells exactly once, to the right person</p>
+                    <p>List something you want to pass on - it sells exactly once, to the right person</p>
                 </div>
                 <Link href="/dashboard/buyer">
                     <Button variant="ghost" size="sm">My Orders →</Button>
@@ -43,7 +44,8 @@ export default async function SellerDashboardPage({
 
             {params.success && (
                 <div className={styles.successBanner}>
-                    ✓ Your listing is now live on the Browse page!
+                    <CheckCircle2 size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '6px' }} />
+                    Your listing is now live on the Browse page!
                 </div>
             )}
 
@@ -141,7 +143,9 @@ export default async function SellerDashboardPage({
                                         Buyer: <strong>{row.orders?.profiles?.display_name ?? 'Unknown'}</strong>
                                         {' · '}{row.orders?.shipping_city}
                                     </p>
-                                    <p className={styles.orderPhone}>📞 {row.orders?.shipping_phone}</p>
+                                    <p className={styles.orderPhone} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                        <Phone size={12} /> {row.orders?.shipping_phone}
+                                    </p>
                                 </div>
                                 <div className={styles.orderActions}>
                                     <p className={styles.orderDate}>

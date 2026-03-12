@@ -42,7 +42,7 @@ export default function ResetPasswordPage() {
             <div className={styles.card}>
                 <p className={styles.eyebrow}>Second · Chances</p>
                 <h1 className={styles.title}>Set new password</h1>
-                <p className={styles.subtitle}>Choose a strong password — at least 8 characters.</p>
+                <p className={styles.subtitle}>Choose a strong password - at least 8 characters.</p>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <Input id="password" type="password" label="New Password" placeholder="Min. 8 characters"

@@ -47,7 +47,7 @@ export default function LoginPage() {
             toast.error(error.message)
             setGoogleLoading(false)
         }
-        // On success, browser redirects — no need to setLoading(false)
+        // On success, browser redirects - no need to setLoading(false)
     }
 
     return (

@@ -64,7 +64,7 @@ function VerifyOtpForm() {
             setDigits(['', '', '', '', '', ''])
             refs[0].current?.focus()
         } else {
-            toast.success('Email verified! Welcome to Second Chances 🎉')
+            toast.success('Email verified! Welcome to Second Chances')
             router.push('/dashboard')
             router.refresh()
         }

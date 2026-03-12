@@ -14,6 +14,6 @@ export async function GET(request: Request) {
         }
     }
 
-    // Auth failed — redirect to login with error hint
+    // Auth failed - redirect to login with error hint
     return NextResponse.redirect(new URL('/auth/login?error=oauth', url.origin))
 }

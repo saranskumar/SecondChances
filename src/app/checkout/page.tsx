@@ -9,7 +9,7 @@ import { placeOrder } from '@/actions/orders'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { toast } from 'sonner'
-import { Check, Package, Phone, Star } from 'lucide-react'
+import { Check, Package, Phone, Star, Lock, Banknote } from 'lucide-react'
 import styles from './page.module.css'
 
 type Step = 1 | 2 | 3 | 4   // 4 = success
@@ -146,7 +146,7 @@ export default function CheckoutPage() {
                                 ))}
                             </div>
                             <div className={styles.notice}>
-                                <span>🔒</span>
+                                <Lock size={16} className={styles.noticeIcon} />
                                 <p>Each item is unique and one-of-a-kind. Placing an order reserves it for you.</p>
                             </div>
                             <Button size="lg" style={{ width: '100%' }} onClick={() => setStep(2)}>
@@ -202,7 +202,7 @@ export default function CheckoutPage() {
                             <div className={styles.reviewSection}>
                                 <p className={styles.reviewLabel}>Payment</p>
                                 <div className={styles.codBadge}>
-                                    <span>💵</span>
+                                    <Banknote size={20} className={styles.codIcon} />
                                     <div>
                                         <p className={styles.codTitle}>Cash on Delivery</p>
                                         <p className={styles.codSub}>Pay in cash only <strong>after</strong> you&apos;ve inspected the item and are satisfied. No payment now.</p>

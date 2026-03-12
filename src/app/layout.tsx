@@ -6,7 +6,7 @@ import { CartProvider } from '@/contexts/CartContext'
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
-  title: 'Second Chances — Vintage & Pre-loved Fashion',
+  title: 'Second Chances - Vintage & Pre-loved Fashion',
   description: 'Shop curated, one-of-a-kind pre-loved fashion. Each piece tells a story. Find your next favourite item from our community of thoughtful sellers.',
   keywords: 'thrift, vintage, pre-loved, secondhand, fashion, sustainable',
 }

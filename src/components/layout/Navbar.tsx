@@ -54,7 +54,7 @@ export function Navbar() {
         <>
             <nav className={styles.nav}>
                 <div className={styles.inner}>
-                    {/* Left — burger */}
+                    {/* Left - burger */}
                     <button
                         className={styles.burger}
                         onClick={() => setMenuOpen(true)}
@@ -63,14 +63,14 @@ export function Navbar() {
                         <Menu size={22} />
                     </button>
 
-                    {/* Center — logo */}
+                    {/* Center - logo */}
                     <Link href="/" className={styles.logo}>
                         <span className={styles.logoSecond}>Second</span>
                         <span className={styles.logoDot}> · </span>
                         <span className={styles.logoChances}>Chances</span>
                     </Link>
 
-                    {/* Right — icons */}
+                    {/* Right - icons */}
                     <div className={styles.icons}>
                         <button
                             className={styles.iconBtn}

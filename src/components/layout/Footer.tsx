@@ -21,7 +21,7 @@ export function Footer() {
                         <p className={styles.brand}>Second · Chances</p>
                         <p className={styles.about}>
                             A curated marketplace for pre-loved fashion. Every item is unique,
-                            every sale is final — and every piece deserves a second life.
+                            every sale is final - and every piece deserves a second life.
                         </p>
                     </div>
 

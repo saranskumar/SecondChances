@@ -38,7 +38,7 @@ export default async function DashboardPage({
             {/* Header */}
             <div className={styles.header}>
                 <h1>My Dashboard</h1>
-                <p>Buy and sell from a single place — your account does it all</p>
+                <p>Buy and sell from a single place - your account does it all</p>
             </div>
 
             {params.success && (
@@ -188,7 +188,7 @@ export default async function DashboardPage({
                             <Input id="title" name="title" label="Title" placeholder="Vintage denim jacket, size M" required />
                             <Textarea
                                 id="description" name="description" label="Description"
-                                placeholder="Describe the item — its story, any wear marks, measurements…"
+                                placeholder="Describe the item - its story, any wear marks, measurements…"
                             />
                             <div className={styles.row}>
                                 <Input id="price" name="price" type="number" label="Price (₹)"

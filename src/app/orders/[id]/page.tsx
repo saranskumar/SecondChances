@@ -45,7 +45,7 @@ export default async function OrderTrackingPage({
                 <div>
                     <p className={styles.eyebrow}>Order #{order.id.slice(0, 8).toUpperCase()}</p>
                     <h1 className={styles.title}>
-                        {order.status === 'delivered' ? 'Your order arrived! 🎉' : 'Order Tracking'}
+                        {order.status === 'delivered' ? 'Your order arrived!' : 'Order Tracking'}
                     </h1>
                     <p className={styles.date}>
                         Placed on {new Date(order.created_at).toLocaleDateString('en-IN', {

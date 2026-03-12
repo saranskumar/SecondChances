@@ -4,10 +4,11 @@ import { getProfile, updateProfile } from '@/actions/profile'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
+import { ShoppingBag, Tag, Search, CheckCircle2, AlertCircle } from 'lucide-react'
 import styles from './page.module.css'
 
 export const metadata = {
-    title: 'My Profile — Second Chances',
+    title: 'My Profile - Second Chances',
     description: 'Manage your Second Chances account details.',
 }
 
@@ -29,13 +30,13 @@ async function handleUpdate(formData: FormData) {
     if (res?.error) {
         redirect(`/profile?error=${encodeURIComponent(res.error)}`)
     }
-    redirect('/profile?updated=1')
+    redirect('/profile?success=true')
 }
 
 export default async function ProfilePage({
     searchParams,
 }: {
-    searchParams: Promise<{ updated?: string; error?: string }>
+    searchParams: Promise<{ success?: string; error?: string }>
 }) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
@@ -74,11 +75,17 @@ export default async function ProfilePage({
             </div>
 
             {/* Feedback banners */}
-            {params.updated && (
-                <div className={styles.successBanner}>✓ Profile updated successfully!</div>
+            {params.success === 'true' && (
+                <div className={styles.successBanner}>
+                    <CheckCircle2 size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '6px' }} />
+                    Profile updated successfully!
+                </div>
             )}
             {params.error && (
-                <div className={styles.errorBanner}>✗ {decodeURIComponent(params.error)}</div>
+                <div className={styles.errorBanner}>
+                    <AlertCircle size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '6px' }} />
+                    {decodeURIComponent(params.error)}
+                </div>
             )}
 
             {/* Edit form */}
@@ -103,16 +110,19 @@ export default async function ProfilePage({
             {/* Quick links */}
             <div className={styles.links}>
                 <Link href="/dashboard/buyer" className={styles.linkCard}>
-                    <span className={styles.linkIcon}>🛍️</span>
-                    <span>My Orders</span>
+                    <span className={styles.linkIcon}><ShoppingBag size={20} /></span>
+                    <span className={styles.linkTitle}>My Orders</span>
+                    <span className={styles.linkSub}>Track your purchases and view history</span>
                 </Link>
                 <Link href="/dashboard/seller" className={styles.linkCard}>
-                    <span className={styles.linkIcon}>🏷️</span>
-                    <span>My Listings</span>
+                    <span className={styles.linkIcon}><Tag size={20} /></span>
+                    <span className={styles.linkTitle}>Seller Dashboard</span>
+                    <span className={styles.linkSub}>Manage your listings and incoming orders</span>
                 </Link>
                 <Link href="/browse" className={styles.linkCard}>
-                    <span className={styles.linkIcon}>🔎</span>
-                    <span>Browse Items</span>
+                    <span className={styles.linkIcon}><Search size={20} /></span>
+                    <span className={styles.linkTitle}>Discover Items</span>
+                    <span className={styles.linkSub}>Browse to find your next favorite piece</span>
                 </Link>
             </div>
         </div>
