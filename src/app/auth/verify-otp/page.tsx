@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
@@ -8,7 +8,7 @@ import { toast } from 'sonner'
 import Link from 'next/link'
 import styles from '../auth.module.css'
 
-export default function VerifyOtpPage() {
+function VerifyOtpForm() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const email = searchParams.get('email') ?? ''
@@ -124,5 +124,13 @@ export default function VerifyOtpPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+export default function VerifyOtpPage() {
+    return (
+        <Suspense fallback={<div className={styles.page}></div>}>
+            <VerifyOtpForm />
+        </Suspense>
     )
 }

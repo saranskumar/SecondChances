@@ -1,3 +1,4 @@
+/* ── Empty ──────────────────────────────────────────────── */
 .empty {
     display: flex;
     flex-direction: column;
@@ -5,105 +6,413 @@
     gap: 1.5rem;
     text-align: center;
     padding-top: 8rem;
-}
-
-.empty p {
     color: var(--ink-60);
-    font-style: italic;
 }
 
-.title {
+/* ── Page title ─────────────────────────────────────────── */
+.pageTitle {
     font-family: var(--ff-heading);
     font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+/* ── Stepper ────────────────────────────────────────────── */
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: 0;
     margin-bottom: 2.5rem;
+    max-width: 480px;
 }
 
-.sectionTitle {
-    font-family: var(--ff-heading);
-    font-size: 1.2rem;
-    margin-bottom: 1.25rem;
+.stepItem {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 0.5rem;
 }
 
+.stepBubble {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 500;
+    flex-shrink: 0;
+    background: var(--mist);
+    color: var(--ink-60);
+    transition: background 0.3s, color 0.3s;
+}
+
+.stepActive .stepBubble {
+    background: var(--ink);
+    color: var(--white);
+}
+
+.stepDone .stepBubble {
+    background: var(--sage-dark);
+    color: var(--white);
+}
+
+.stepLabel {
+    font-size: 0.78rem;
+    color: var(--ink-60);
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+.stepActive .stepLabel {
+    color: var(--ink);
+    font-weight: 500;
+}
+
+.stepLine {
+    flex: 1;
+    height: 1.5px;
+    background: var(--mist);
+    margin: 0 0.5rem;
+}
+
+.stepLineDone {
+    background: var(--sage-dark);
+}
+
+/* ── Layout ─────────────────────────────────────────────── */
 .layout {
     display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 3rem;
+    grid-template-columns: 1fr 300px;
+    gap: 2.5rem;
     align-items: start;
 }
 
+/* ── Main panel ─────────────────────────────────────────── */
+.panel {
+    background: var(--white);
+    border: 1px solid var(--mist);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    box-shadow: var(--shadow-card);
+    animation: fadeUp 0.25s ease both;
+}
+
+.panelTitle {
+    font-family: var(--ff-heading);
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.panelSub {
+    font-size: 0.875rem;
+    color: var(--ink-60);
+    margin-top: -0.8rem;
+}
+
+/* ── Cart items (step 1) ────────────────────────────────── */
+.cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cartItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cartImg {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    background: var(--cream);
+    flex-shrink: 0;
+}
+
+.cartInfo {
+    flex: 1;
+}
+
+.cartName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+}
+
+.cartCond {
+    font-size: 0.8rem;
+    color: var(--ink-60);
+    text-transform: capitalize;
+}
+
+.cartPrice {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+}
+
+/* ── Notice box ─────────────────────────────────────────── */
+.notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1rem;
+    font-size: 0.82rem;
+    color: var(--ink-60);
+    line-height: 1.5;
+}
+
+/* ── Form ───────────────────────────────────────────────── */
 .form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
 }
 
-.paymentNote {
-    background: var(--mist);
-    border-radius: var(--radius-md);
-    padding: 1rem 1.25rem;
+/* ── Button row ─────────────────────────────────────────── */
+.btnRow {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* ── Review sections (step 3) ───────────────────────────── */
+.reviewSection {
+    border-top: 1px solid var(--mist);
+    padding-top: 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.3rem;
 }
 
-.paymentNote p {
+.reviewLabel {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+    margin-bottom: 0.4rem;
+}
+
+.reviewVal {
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+
+/* ── COD badge ──────────────────────────────────────────── */
+.codBadge {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    font-size: 0.875rem;
+}
+
+.codTitle {
     font-weight: 600;
     color: var(--ink);
-    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
 }
 
-.paymentNote span {
-    font-size: 0.8125rem;
+.codSub {
     color: var(--ink-60);
+    line-height: 1.5;
+    font-size: 0.82rem;
 }
 
-.orderSummary {
+/* ── Bullet list ────────────────────────────────────────── */
+.bulletList {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    line-height: 1.6;
+}
+
+/* ── Sidebar ────────────────────────────────────────────── */
+.sidebar {
     background: var(--white);
+    border: 1px solid var(--mist);
     border-radius: var(--radius-lg);
-    padding: 1.75rem;
-    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
     position: sticky;
     top: 90px;
+    box-shadow: var(--shadow-soft);
 }
 
-.summaryItems {
+.sidebarTitle {
+    font-family: var(--ff-heading);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.sideItems {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1rem;
 }
 
-.summaryItem {
+.sideItem {
     display: flex;
     justify-content: space-between;
     font-size: 0.875rem;
+    gap: 0.5rem;
 }
 
-.summaryName {
+.sideItemName {
     color: var(--ink-60);
+    flex: 1;
 }
 
-.summaryPrice {
-    color: var(--ink);
+.sideItemPrice {
     font-weight: 500;
+    white-space: nowrap;
 }
 
-.summaryTotal {
+.sideTotal {
     display: flex;
     justify-content: space-between;
-    font-size: 1.05rem;
     font-weight: 600;
-    color: var(--ink);
+    font-size: 1rem;
     border-top: 1.5px solid var(--mist);
-    padding-top: 1rem;
+    padding-top: 0.85rem;
+    margin-bottom: 0.75rem;
 }
 
+.sideCod {
+    font-size: 0.775rem;
+    color: var(--ink-60);
+    text-align: center;
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.6rem;
+}
+
+/* ── Success screen ─────────────────────────────────────── */
+.successWrap {
+    max-width: 540px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    animation: fadeUp 0.4s ease both;
+}
+
+.successIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--sage);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.successTitle {
+    font-family: var(--ff-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.successSub {
+    color: var(--ink-60);
+    font-size: 0.9rem;
+}
+
+/* ── What happens next ──────────────────────────────────── */
+.nextSteps {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--mist);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-card);
+    text-align: left;
+}
+
+.nextStepsTitle {
+    font-family: var(--ff-heading);
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+}
+
+.stepsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.nextStep {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.nextStepIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--warm);
+    flex-shrink: 0;
+}
+
+.nextStepHead {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+}
+
+.nextStepBody {
+    font-size: 0.82rem;
+    color: var(--ink-60);
+    line-height: 1.55;
+}
+
+.successActions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 768px) {
     .layout {
         grid-template-columns: 1fr;
     }
-
-    .orderSummary {
+    .sidebar {
         position: static;
+        order: -1;
+    }
+    .stepper {
+        max-width: 100%;
+    }
+    .stepLabel {
+        display: none;
     }
 }

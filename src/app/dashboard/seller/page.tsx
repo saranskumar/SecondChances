@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { getMyListings, createProduct } from '@/actions/products'
+import { getIncomingOrders } from '@/actions/orders'
 import { Button } from '@/components/ui/Button'
 import { Input, Textarea, Select } from '@/components/ui/Input'
 import { StatusBadge, ConditionBadge } from '@/components/ui/Badge'
@@ -24,7 +25,9 @@ export default async function SellerDashboardPage({
     if (!user) redirect('/auth')
 
     const params = await searchParams
-    const [listings, categories] = await Promise.all([getMyListings(), getCategories()])
+    const [listings, categories, incomingOrders] = await Promise.all([
+        getMyListings(), getCategories(), getIncomingOrders()
+    ])
 
     return (
         <div className="container section">
@@ -118,6 +121,41 @@ export default async function SellerDashboardPage({
                     )}
                 </section>
             </div>
+
+            {/* Incoming orders section */}
+            <section className={styles.incomingSection}>
+                <h2 className={styles.sectionTitle}>Incoming Orders ({incomingOrders.length})</h2>
+
+                {incomingOrders.length === 0 ? (
+                    <div className={styles.empty}>
+                        <p>No orders received yet. Orders placed for your listings will appear here.</p>
+                    </div>
+                ) : (
+                    <div className={styles.ordersList}>
+                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                        {incomingOrders.map((row: any) => (
+                            <div key={row.order_id} className={styles.orderRow}>
+                                <div className={styles.orderInfo}>
+                                    <p className={styles.orderItem}>{row.products?.title}</p>
+                                    <p className={styles.orderMeta}>
+                                        Buyer: <strong>{row.orders?.profiles?.display_name ?? 'Unknown'}</strong>
+                                        {' · '}{row.orders?.shipping_city}
+                                    </p>
+                                    <p className={styles.orderPhone}>📞 {row.orders?.shipping_phone}</p>
+                                </div>
+                                <div className={styles.orderActions}>
+                                    <p className={styles.orderDate}>
+                                        {new Date(row.orders?.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
+                                    </p>
+                                    <Link href={`/orders/${row.order_id}`} className={styles.trackLink}>
+                                        Track Order →
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
         </div>
     )
 }

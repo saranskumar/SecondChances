@@ -175,3 +175,79 @@
         display: none;
     }
 }
+
+/* ── Incoming orders ─────────────────────────────────────── */
+.incomingSection {
+    margin-top: 3rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-card);
+}
+
+.ordersList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.orderRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--mist);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition);
+}
+
+.orderRow:hover {
+    border-color: var(--warm);
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.orderItem {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.orderMeta {
+    font-size: 0.8rem;
+    color: var(--ink-60);
+}
+
+.orderPhone {
+    font-size: 0.8rem;
+    color: var(--ink-60);
+}
+
+.orderActions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+.orderDate {
+    font-size: 0.75rem;
+    color: var(--ink-30);
+}
+
+.trackLink {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--warm);
+    transition: color var(--transition);
+}
+
+.trackLink:hover {
+    color: var(--ink);
+}

@@ -33,38 +33,84 @@ export default async function BuyerDashboardPage() {
                 </div>
             ) : (
                 <div className={styles.ordersList}>
-                    {orders.map((order: Record<string, unknown>) => {
-                        const items = (order.order_items as Record<string, unknown>[]) ?? []
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    {orders.map((order: any) => {
+                        const items = order.order_items ?? []
                         return (
-                            <div key={order.id as string} className={styles.orderCard}>
+                            <div key={order.id} className={styles.orderCard}>
+                                {/* ── Card header ───────────────── */}
                                 <div className={styles.orderHeader}>
                                     <div>
-                                        <p className={styles.orderId}>Order #{(order.id as string).slice(0, 8).toUpperCase()}</p>
-                                        <p className={styles.orderDate}>{new Date(order.created_at as string).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                                        <p className={styles.orderId}>
+                                            Order #{order.id.slice(0, 8).toUpperCase()}
+                                        </p>
+                                        <p className={styles.orderDate}>
+                                            {new Date(order.created_at).toLocaleDateString('en-IN', {
+                                                year: 'numeric', month: 'long', day: 'numeric'
+                                            })}
+                                        </p>
                                     </div>
                                     <div className={styles.orderRight}>
-                                        <StatusBadge status={order.status as string} />
-                                        <span className={styles.orderTotal}>₹{(order.total_amount as number).toLocaleString()}</span>
+                                        <StatusBadge status={order.status} />
+                                        <span className={styles.orderTotal}>
+                                            ₹{Number(order.total_amount).toLocaleString()}
+                                        </span>
                                     </div>
                                 </div>
 
-                                <div className={styles.itemsRow}>
-                                    {items.map((item: Record<string, unknown>) => {
-                                        const product = item.products as Record<string, unknown>
+                                {/* ── Items list ─────────────────── */}
+                                <div className={styles.itemsList}>
+                                    {items.map((item: any) => {
+                                        const product = item.products
                                         return (
-                                            <div key={item.id as string} className={styles.itemThumb}>
-                                                {(product?.image_urls as string[])?.[0] ? (
-                                                    <Image src={(product.image_urls as string[])[0]} alt={product.title as string} fill sizes="80px" style={{ objectFit: 'cover' }} />
-                                                ) : null}
+                                            <div key={item.id} className={styles.orderItem}>
+                                                <div className={styles.itemImg}>
+                                                    {product?.image_urls?.[0] && (
+                                                        <Image
+                                                            src={product.image_urls[0]}
+                                                            alt={product.title}
+                                                            fill sizes="64px"
+                                                            style={{ objectFit: 'cover' }}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <div className={styles.itemInfo}>
+                                                    <Link href={`/products/${product?.id}`} className={styles.itemName}>
+                                                        {product?.title}
+                                                    </Link>
+                                                    <p className={styles.itemPrice}>
+                                                        ₹{Number(product?.price).toLocaleString()}
+                                                    </p>
+                                                </div>
+                                                <StatusBadge status={product?.status ?? 'available'} />
                                             </div>
                                         )
                                     })}
                                 </div>
 
+                                {/* ── Shipping info ──────────────── */}
+                                <div className={styles.shippingRow}>
+                                    <div className={styles.shippingBlock}>
+                                        <p className={styles.shippingLabel}>Delivering to</p>
+                                        <p className={styles.shippingVal}>
+                                            {order.shipping_name} · {order.shipping_address}, {order.shipping_city}
+                                        </p>
+                                        <p className={styles.shippingVal}>{order.shipping_phone}</p>
+                                    </div>
+                                    <div className={styles.shippingBlock}>
+                                        <p className={styles.shippingLabel}>Payment</p>
+                                        <p className={styles.shippingVal}>Cash on Delivery</p>
+                                        <p className={styles.codNote}>Pay only when you&apos;re satisfied</p>
+                                    </div>
+                                </div>
+
+                                {/* ── Footer ────────────────────── */}
                                 <div className={styles.orderFooter}>
-                                    <p className={styles.itemCount}>{items.length} item{items.length !== 1 ? 's' : ''}</p>
-                                    <Link href={`/orders/${order.id as string}`}>
-                                        <Button variant="ghost" size="sm">View Details →</Button>
+                                    <p className={styles.itemCount}>
+                                        {items.length} item{items.length !== 1 ? 's' : ''}
+                                    </p>
+                                    <Link href={`/orders/${order.id}`}>
+                                        <Button variant="ghost" size="sm">Track Order →</Button>
                                     </Link>
                                 </div>
                             </div>
