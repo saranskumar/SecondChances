@@ -1,15 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCart } from '@/contexts/CartContext'
 import { placeOrder } from '@/actions/orders'
+import { getMyAddresses, type Address } from '@/actions/addresses'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { toast } from 'sonner'
-import { Check, Package, Phone, Star, Lock, Banknote } from 'lucide-react'
+import { Check, Package, Phone, Star, Lock, Banknote, MapPin, Plus } from 'lucide-react'
 import styles from './page.module.css'
 
 type Step = 1 | 2 | 3 | 4   // 4 = success
@@ -22,9 +23,30 @@ export default function CheckoutPage() {
     const [step, setStep] = useState<Step>(1)
     const [loading, setLoading] = useState(false)
     const [orderId, setOrderId] = useState<string | null>(null)
+    const [addresses, setAddresses] = useState<Address[]>([])
+    const [useSaved, setUseSaved] = useState(true)
     const [form, setForm] = useState({ name: '', address: '', city: '', phone: '' })
     const update = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
     const total = items.reduce((sum, i) => sum + Number(i.product.price), 0)
+
+    useEffect(() => {
+        const fetchAddresses = async () => {
+            const data = await getMyAddresses()
+            setAddresses(data)
+            const defaultAddr = data.find(a => a.is_default) || data[0]
+            if (defaultAddr) {
+                setForm({
+                    name: defaultAddr.full_name,
+                    phone: defaultAddr.phone,
+                    address: defaultAddr.address,
+                    city: defaultAddr.city
+                })
+            } else {
+                setUseSaved(false)
+            }
+        }
+        fetchAddresses()
+    }, [])
 
     if (count === 0 && step !== 4) {
         return (
@@ -159,17 +181,60 @@ export default function CheckoutPage() {
                     {step === 2 && (
                         <div className={styles.panel}>
                             <h2 className={styles.panelTitle}>Delivery Details</h2>
-                            <p className={styles.panelSub}>The seller will use this to arrange delivery with you.</p>
-                            <div className={styles.form}>
-                                <Input id="name" label="Full Name" placeholder="Jane Doe"
-                                    value={form.name} onChange={e => update('name', e.target.value)} required />
-                                <Input id="phone" label="Phone Number" placeholder="+91 98765 43210"
-                                    value={form.phone} onChange={e => update('phone', e.target.value)} required />
-                                <Input id="address" label="Delivery Address" placeholder="House no., Street, Locality"
-                                    value={form.address} onChange={e => update('address', e.target.value)} required />
-                                <Input id="city" label="City / Town" placeholder="Bengaluru"
-                                    value={form.city} onChange={e => update('city', e.target.value)} required />
-                            </div>
+                            <p className={styles.panelSub}>Where should we deliver your items?</p>
+
+                            {addresses.length > 0 && useSaved ? (
+                                <div className={styles.addressPicker}>
+                                    {addresses.map((a) => (
+                                        <label key={a.id} className={`${styles.addressOption} ${form.address === a.address ? styles.addressSelected : ''}`}>
+                                            <input
+                                                type="radio"
+                                                name="addressId"
+                                                className={styles.radio}
+                                                checked={form.address === a.address && form.name === a.full_name}
+                                                onChange={() => {
+                                                    setForm({
+                                                        name: a.full_name,
+                                                        phone: a.phone,
+                                                        address: a.address,
+                                                        city: a.city
+                                                    })
+                                                }}
+                                            />
+                                            <div className={styles.addrDetails}>
+                                                <div className={styles.addrLabel}>
+                                                    <MapPin size={12} />
+                                                    {a.label}
+                                                </div>
+                                                <p className={styles.addrMain}>{a.full_name} · {a.phone}</p>
+                                                <p className={styles.addrSub}>{a.address}, {a.city}</p>
+                                            </div>
+                                        </label>
+                                    ))}
+                                    <button className={styles.newAddressBtn} onClick={() => {
+                                        setUseSaved(false);
+                                        setForm({ name: '', phone: '', address: '', city: '' });
+                                    }}>
+                                        <Plus size={16} /> Use a different address
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className={styles.form}>
+                                    <Input id="name" label="Full Name" placeholder="Jane Doe"
+                                        value={form.name} onChange={e => update('name', e.target.value)} required />
+                                    <Input id="phone" label="Phone Number" placeholder="+91 98765 43210"
+                                        value={form.phone} onChange={e => update('phone', e.target.value)} required />
+                                    <Input id="address" label="Delivery Address" placeholder="House no., Street, Locality"
+                                        value={form.address} onChange={e => update('address', e.target.value)} required />
+                                    <Input id="city" label="City / Town" placeholder="Bengaluru"
+                                        value={form.city} onChange={e => update('city', e.target.value)} required />
+                                    {addresses.length > 0 && (
+                                        <Button variant="ghost" onClick={() => setUseSaved(true)} style={{ alignSelf: 'flex-start', padding: 0 }}>
+                                            ← Use a saved address
+                                        </Button>
+                                    )}
+                                </div>
+                            )}
                             <div className={styles.btnRow}>
                                 <Button variant="ghost" onClick={() => setStep(1)}>← Back</Button>
                                 <Button

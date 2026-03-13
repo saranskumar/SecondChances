@@ -416,3 +416,90 @@
         display: none;
     }
 }
+
+/* ── Address Picker ────────────────────────────────────── */
+.addressPicker {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.addressOption {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--mist);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--white);
+}
+
+.addressOption:hover {
+    border-color: var(--sage);
+    background: var(--cream);
+}
+
+.addressSelected {
+    border-color: var(--sage);
+    background: color-mix(in srgb, var(--sage) 10%, var(--white));
+    border-width: 2px;
+}
+
+.radio {
+    margin-top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--sage-dark);
+}
+
+.addrDetails {
+    flex: 1;
+}
+
+.addrLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-60);
+    margin-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.addrMain {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.1rem;
+}
+
+.addrSub {
+    font-size: 0.85rem;
+    color: var(--ink-60);
+}
+
+.newAddressBtn {
+    width: 100%;
+    padding: 1rem;
+    border: 1px dashed var(--mist);
+    border-radius: var(--radius-md);
+    background: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--ink-60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.newAddressBtn:hover {
+    border-color: var(--sage);
+    color: var(--sage-dark);
+    background: var(--cream);
+}
