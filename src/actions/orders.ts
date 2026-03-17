@@ -55,7 +55,7 @@ export async function getOrderById(orderId: string) {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return null
 
-    const { data } = await supabase
+    const { data, error } = await supabase
         .from('orders')
         .select(`
       *,
@@ -66,6 +66,8 @@ export async function getOrderById(orderId: string) {
     `)
         .eq('id', orderId)
         .single()
+    
+    console.log("getOrderById raw data:", data, "error:", error)
 
     if (!data) return null
 
