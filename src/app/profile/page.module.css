@@ -1,4 +1,5 @@
-.header {
+/* ── Hero header ─────────────────────────────────────────── */
+.hero {
     display: flex;
     align-items: center;
     gap: 1.5rem;
@@ -6,13 +7,13 @@
 }
 
 .avatarCircle {
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     background: var(--sage);
     color: var(--ink);
     font-family: var(--ff-heading);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -21,29 +22,60 @@
     box-shadow: var(--shadow-soft);
 }
 
+.heroInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
 .name {
     font-size: 1.8rem;
-    margin-bottom: 0.2rem;
+    margin: 0;
 }
 
 .email {
     color: var(--ink-60);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    margin: 0;
 }
 
-/* Stats */
+.memberSince {
+    color: var(--ink-60);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.googleBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: #e8f0fe;
+    color: #3c69d6;
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* ── Stats ───────────────────────────────────────────────── */
 .statsRow {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
 .statCard {
     flex: 1;
+    min-width: 90px;
     background: var(--cream);
     border: 1px solid var(--mist);
     border-radius: var(--radius-lg);
-    padding: 1.25rem 1.5rem;
+    padding: 1.1rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,20 +85,21 @@
 
 .statNum {
     font-family: var(--ff-heading);
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 300;
     color: var(--ink);
     line-height: 1;
 }
 
 .statLabel {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: var(--ink-60);
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    text-align: center;
 }
 
-/* Banners */
+/* ── Banners ─────────────────────────────────────────────── */
 .successBanner {
     background: #D4EDDA;
     color: #155724;
@@ -87,7 +120,7 @@
     font-size: 0.9rem;
 }
 
-/* Edit card */
+/* ── Edit card ───────────────────────────────────────────── */
 .card {
     background: var(--white);
     border: 1px solid var(--mist);
@@ -115,49 +148,16 @@
     color: var(--ink-60);
 }
 
-/* Quick links */
-.links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.linkCard {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: var(--cream);
-    border: 1px solid var(--mist);
-    border-radius: var(--radius-md);
-    padding: 0.75rem 1.25rem;
-    font-size: 0.9rem;
-    transition: background var(--transition), box-shadow var(--transition);
-}
-
-.linkCard:hover {
-    background: var(--cream-dark);
-    box-shadow: var(--shadow-soft);
-}
-
-.linkIcon {
-    font-size: 1.1rem;
-}
-
-@media (max-width: 600px) {
-    .statsRow {
-        flex-direction: column;
-    }
-
-    .header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-/* ── Addresses ─────────────────────────────────────────── */
+/* ── Addresses ───────────────────────────────────────────── */
 .addressesWrap {
     margin-bottom: 2rem;
     max-width: 520px;
+}
+
+.emptyAddr {
+    font-size: 0.875rem;
+    color: var(--ink-60);
+    margin-bottom: 1rem;
 }
 
 .addressList {
@@ -184,9 +184,7 @@
     background: color-mix(in srgb, var(--sage) 10%, var(--white));
 }
 
-.addressInfo {
-    flex: 1;
-}
+.addressInfo { flex: 1; }
 
 .addressLabel {
     font-size: 0.75rem;
@@ -236,20 +234,10 @@
     transition: background var(--transition);
     white-space: nowrap;
 }
+.addrBtn:hover { background: var(--mist); }
+.addrBtnDanger { color: #b91c1c; }
+.addrBtnDefault { color: var(--ink-60); }
 
-.addrBtn:hover {
-    background: var(--mist);
-}
-
-.addrBtnDanger {
-    color: #b91c1c;
-}
-
-.addrBtnDefault {
-    color: var(--ink-60);
-}
-
-/* Add form */
 .addAddrToggle {
     width: 100%;
     background: none;
@@ -264,4 +252,62 @@
     align-items: center;
     justify-content: center;
     gap: 0.4rem;
+}
+.addAddrToggle:hover {
+    border-color: var(--sage);
+    color: var(--sage-dark);
+}
+
+/* ── Quick links ─────────────────────────────────────────── */
+.links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.linkCard {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--cream);
+    border: 1px solid var(--mist);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.25rem;
+    min-width: 160px;
+    flex: 1;
+    font-size: 0.9rem;
+    transition: background var(--transition), box-shadow var(--transition);
+}
+
+.linkCard:hover {
+    background: var(--cream-dark);
+    box-shadow: var(--shadow-soft);
+}
+
+.linkIcon {
+    flex-shrink: 0;
+    color: var(--ink-60);
+}
+
+.linkTitle {
+    display: block;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--ink);
+}
+
+.linkSub {
+    display: block;
+    font-size: 0.775rem;
+    color: var(--ink-60);
+    margin-top: 1px;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .statsRow { gap: 0.6rem; }
+    .statCard { padding: 0.9rem 0.6rem; }
+    .hero { flex-direction: column; align-items: flex-start; }
+    .links { flex-direction: column; }
+    .linkCard { min-width: unset; }
 }

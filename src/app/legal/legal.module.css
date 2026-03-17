@@ -1,0 +1,66 @@
+.wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+}
+
+.title {
+    font-family: var(--ff-heading);
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+}
+
+.lastUpdated {
+    font-size: 0.9rem;
+    color: var(--ink-60);
+    margin-bottom: 3rem;
+    display: block;
+}
+
+.content {
+    color: var(--ink);
+    line-height: 1.8;
+}
+
+.content h2 {
+    font-family: var(--ff-heading);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--ink);
+}
+
+.content h3 {
+    font-family: var(--ff-heading);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.content p {
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+}
+
+.content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.content li {
+    margin-bottom: 0.5rem;
+}
+
+.content a {
+    color: var(--sage-dark);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.content a:hover {
+    color: var(--ink);
+}

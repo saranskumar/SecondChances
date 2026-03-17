@@ -23,10 +23,12 @@ export async function createProduct(formData: FormData) {
         const ext = file.name.split('.').pop()
         const path = `products/${user.id}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
         const { error } = await supabase.storage.from('product-images').upload(path, file)
-        if (!error) {
-            const { data: { publicUrl } } = supabase.storage.from('product-images').getPublicUrl(path)
-            image_urls.push(publicUrl)
+        if (error) {
+            console.error('Storage upload error:', error)
+            throw new Error(`Failed to upload image: ${error.message}`)
         }
+        const { data: { publicUrl } } = supabase.storage.from('product-images').getPublicUrl(path)
+        image_urls.push(publicUrl)
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

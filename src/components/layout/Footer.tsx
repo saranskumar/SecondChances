@@ -40,9 +40,9 @@ export function Footer() {
 
                     <div className={styles.col}>
                         <h4>Legal</h4>
-                        <Link href="#">Privacy Policy</Link>
-                        <Link href="#">Terms of Service</Link>
-                        <Link href="#">Shipping Policy</Link>
+                        <Link href="/legal/privacy">Privacy Policy</Link>
+                        <Link href="/legal/terms">Terms of Service</Link>
+                        <Link href="/legal/shipping">Shipping Policy</Link>
                     </div>
                 </div>
 
