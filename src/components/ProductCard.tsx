@@ -12,7 +12,6 @@ interface Props {
 
 export function ProductCard({ product }: Props) {
     const isSold = product.status === 'sold'
-    const isReserved = product.status === 'reserved'
     const conditionLabel = {
         like_new: 'Like New',
         good: 'Good',
@@ -22,7 +21,7 @@ export function ProductCard({ product }: Props) {
     return (
         <Link
             href={`/products/${product.id}`}
-            className={`${styles.card} soft-shadow-card hover-scale ${isSold || isReserved ? styles.soldCard : ''}`}
+            className={`${styles.card} ${isSold ? styles.soldCard : ''}`}
         >
             {/* Image */}
             <div className={styles.imageWrap}>
@@ -50,17 +49,11 @@ export function ProductCard({ product }: Props) {
                     <Heart size={16} />
                 </button>
 
-                {/* Sold/Reserved overlay */}
-                {(isSold || isReserved) && (
-                    <>
-                        <div className={styles.soldOverlay}></div>
-                        <div className="vintage-stamp" style={{ 
-                            color: isReserved ? '#f59e0b' : '#ce4242', 
-                            borderColor: isReserved ? '#f59e0b' : '#ce4242' 
-                        }}>
-                            {isReserved ? 'Reserved' : 'Sold'}
-                        </div>
-                    </>
+                {/* Sold overlay */}
+                {isSold && (
+                    <div className={styles.soldOverlay}>
+                        <span>Sold</span>
+                    </div>
                 )}
 
                 {/* Condition chip */}

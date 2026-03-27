@@ -33,12 +33,11 @@ export interface Database {
                     description: string | null
                     price: number
                     condition: 'like_new' | 'good' | 'fair'
-                    status: 'available' | 'reserved' | 'sold'
-                    is_deleted: boolean
+                    status: 'available' | 'sold'
                     image_urls: string[]
                     created_at: string
                 }
-                Insert: Omit<Database['public']['Tables']['products']['Row'], 'id' | 'created_at' | 'is_deleted'> & { is_deleted?: boolean }
+                Insert: Omit<Database['public']['Tables']['products']['Row'], 'id' | 'created_at'>
                 Update: Partial<Database['public']['Tables']['products']['Insert']>
             }
             orders: {
@@ -79,26 +78,11 @@ export interface Database {
                 Insert: Omit<Database['public']['Tables']['payments']['Row'], 'id' | 'created_at'>
                 Update: Partial<Database['public']['Tables']['payments']['Insert']>
             }
-            product_price_history: {
-                Row: { id: string, product_id: string, old_price: number, new_price: number, changed_at: string }
-                Insert: Omit<Database['public']['Tables']['product_price_history']['Row'], 'id' | 'changed_at'>
-                Update: Partial<Database['public']['Tables']['product_price_history']['Insert']>
-            }
-            activity_logs: {
-                Row: { id: string, user_id: string | null, action: string, target_table: string | null, target_id: string | null, timestamp: string }
-                Insert: Omit<Database['public']['Tables']['activity_logs']['Row'], 'id' | 'timestamp'>
-                Update: Partial<Database['public']['Tables']['activity_logs']['Insert']>
-            }
-        }
-        Views: {
-            popular_products: {
-                Row: { product_id: string, title: string, category_id: number, times_sold: number }
-            }
         }
         Functions: {
-            checkout_start: {
+            place_order: {
                 Args: {
-                    p_user_id: string
+                    p_user_id: string           // buyer's user id
                     p_product_ids: string[]
                     p_shipping_name?: string
                     p_shipping_address?: string
@@ -106,14 +90,6 @@ export interface Database {
                     p_shipping_phone?: string
                 }
                 Returns: string
-            }
-            checkout_success: {
-                Args: { p_order_id: string, p_provider?: string, p_provider_ref?: string }
-                Returns: void
-            }
-            checkout_timeout: {
-                Args: { p_order_id: string }
-                Returns: void
             }
         }
     }
