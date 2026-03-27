@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCart } from '@/contexts/CartContext'
-import { placeOrder } from '@/actions/orders'
+import { startCheckout, confirmOrder, cancelCheckout } from '@/actions/orders'
 import { getMyAddresses, type Address } from '@/actions/addresses'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
@@ -57,22 +57,43 @@ export default function CheckoutPage() {
         )
     }
 
-    const handlePlaceOrder = async () => {
+    const handleStartCheckout = async () => {
         setLoading(true)
         try {
-            const id = await placeOrder({
-                productIds: items.map(i => i.product.id),
-                shipping: form,
-            })
-            clearCart()
+            const id = await startCheckout(items.map(i => i.product.id))
             setOrderId(id)
-            setStep(4)
+            setStep(2)
         } catch (err: unknown) {
-            const msg = err instanceof Error ? err.message : 'Failed to place order'
+            const msg = err instanceof Error ? err.message : 'Items no longer available'
             toast.error(msg)
         } finally {
             setLoading(false)
         }
+    }
+
+    const handleConfirmOrder = async () => {
+        if (!orderId) return
+        setLoading(true)
+        try {
+            await confirmOrder(orderId, form)
+            clearCart()
+            setStep(4)
+        } catch (err: unknown) {
+            const msg = err instanceof Error ? err.message : 'Failed to confirm order'
+            toast.error(msg)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const handleBack = async (targetStep: Step) => {
+        if (orderId && targetStep === 1) {
+            setLoading(true)
+            await cancelCheckout(orderId).catch(() => {})
+            setOrderId(null)
+            setLoading(false)
+        }
+        setStep(targetStep)
     }
 
     // ── Success screen ──────────────────────────────────────
@@ -171,7 +192,7 @@ export default function CheckoutPage() {
                                 <Lock size={16} className={styles.noticeIcon} />
                                 <p>Each item is unique and one-of-a-kind. Placing an order reserves it for you.</p>
                             </div>
-                            <Button size="lg" style={{ width: '100%' }} onClick={() => setStep(2)}>
+                            <Button size="lg" style={{ width: '100%' }} loading={loading} onClick={handleStartCheckout}>
                                 Continue to Shipping →
                             </Button>
                         </div>
@@ -236,7 +257,7 @@ export default function CheckoutPage() {
                                 </div>
                             )}
                             <div className={styles.btnRow}>
-                                <Button variant="ghost" onClick={() => setStep(1)}>← Back</Button>
+                                <Button variant="ghost" disabled={loading} onClick={() => handleBack(1)}>← Back</Button>
                                 <Button
                                     onClick={() => {
                                         if (!form.name || !form.phone || !form.address || !form.city) {
@@ -285,8 +306,8 @@ export default function CheckoutPage() {
                             </div>
 
                             <div className={styles.btnRow}>
-                                <Button variant="ghost" onClick={() => setStep(2)}>← Back</Button>
-                                <Button size="lg" loading={loading} onClick={handlePlaceOrder}>
+                                <Button variant="ghost" disabled={loading} onClick={() => handleBack(2)}>← Back</Button>
+                                <Button size="lg" loading={loading} onClick={handleConfirmOrder}>
                                     Place Order · ₹{total.toLocaleString()}
                                 </Button>
                             </div>

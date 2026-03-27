@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { ConditionBadge, StatusBadge } from '@/components/ui/Badge'
 import { AddToCartButton } from '@/components/AddToCartButton'
+import { SimilarProducts } from '@/components/SimilarProducts'
+import { TrackRecentlyViewed } from '@/components/TrackRecentlyViewed'
 import type { ProductWithDetails } from '@/types/database'
 import styles from './page.module.css'
 
@@ -81,7 +83,9 @@ export default async function ProductDetailPage({
                         </div>
                         <div>
                             <p className={styles.sellerLabel}>Listed by</p>
-                            <p className={styles.sellerName}>{product.profiles?.display_name ?? 'Seller'}</p>
+                            <Link href={`/seller/${product.user_id}`} className={styles.sellerName} style={{textDecoration: 'underline'}}>
+                                {product.profiles?.display_name ?? 'Seller'}
+                            </Link>
                         </div>
                     </div>
 
@@ -94,6 +98,12 @@ export default async function ProductDetailPage({
                         </div>
                     )}
                 </div>
+            </div>
+
+            <TrackRecentlyViewed product={product} />
+
+            <div style={{ marginTop: '5rem' }}>
+                <SimilarProducts currentProductId={product.id} categoryId={product.category_id} price={product.price} />
             </div>
         </div>
     )

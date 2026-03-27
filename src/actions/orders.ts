@@ -3,31 +3,64 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
-export async function placeOrder(formData: {
-    productIds: string[]
-    shipping: {
-        name: string
-        address: string
-        city: string
-        phone: string
-    }
-}) {
+export async function startCheckout(productIds: string[]) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) redirect('/auth')
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const { data, error } = await (supabase as any).rpc('place_order', {
-        p_user_id: user.id,           // unified: user_id for both buyer and any context
-        p_product_ids: formData.productIds,
-        p_shipping_name: formData.shipping.name,
-        p_shipping_address: formData.shipping.address,
-        p_shipping_city: formData.shipping.city,
-        p_shipping_phone: formData.shipping.phone,
+    const { data, error } = await (supabase as any).rpc('checkout_start', {
+        p_user_id: user.id,
+        p_product_ids: productIds,
     })
 
     if (error) throw new Error(error.message)
     return data as string // order_id
+}
+
+export async function confirmOrder(orderId: string, shipping: {
+    name: string
+    address: string
+    city: string
+    phone: string
+}) {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) redirect('/auth')
+
+    // Update shipping details
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error: updateError } = await (supabase as any)
+        .from('orders')
+        .update({
+            shipping_name: shipping.name,
+            shipping_address: shipping.address,
+            shipping_city: shipping.city,
+            shipping_phone: shipping.phone
+        })
+        .eq('id', orderId)
+        .eq('user_id', user.id)
+
+    if (updateError) throw new Error(updateError.message)
+
+    // Mark as paid
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any).rpc('checkout_success', {
+        p_order_id: orderId,
+        p_provider: 'cod'
+    })
+
+    if (error) throw new Error(error.message)
+    return orderId
+}
+
+export async function cancelCheckout(orderId: string) {
+    const supabase = await createClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error } = await (supabase as any).rpc('checkout_timeout', {
+        p_order_id: orderId
+    })
+    if (error) throw new Error(error.message)
 }
 
 export async function getMyOrders() {

@@ -145,3 +145,46 @@ h3 {
     transform: rotate(360deg);
   }
 }
+
+/* ── UI Effects (Vintage Premium Pastel) ───────────────── */
+
+/* Vintage Sold Stamp */
+.vintage-stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    color: #ce4242;
+    border: 4px solid #ce4242;
+    padding: 0.5rem 1.5rem;
+    font-family: var(--ff-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+    background: transparent;
+    border-radius: 8px;
+    z-index: 10;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+/* Hover Scale */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hover-scale:hover {
+    transform: scale(1.02);
+}
+
+/* Soft Shadow Card */
+.soft-shadow-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.3s ease;
+}
+.soft-shadow-card:hover {
+    box-shadow: var(--shadow-lift);
+}
